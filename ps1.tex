@@ -20,5 +20,85 @@
 
 \begin{document}
 
+\begin{problem}[A: Perturbation bound analysis]
+	
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}
+    \item
+      \begin{align}
+	\|X Y\|_F^2
+	= \sum_{i=1}^k \| X y_i \|_2^2
+	\leq \|X\|_2 \sum_{i=1}^k \|y_i\|_2^2
+	= \|X\|_2 \|Y\|_F^2
+      \end{align}
+      Apply this to $X = L^{-1}$ and $Y = A = L L^\top$ to find
+      \begin{align}
+	\| L^{-1} L L^\top \|_F
+	= \| L^\top \|_F
+	= \| L \|_F
+	&\leq \| L^{-1}\|_2 \|A\|_F \\
+	\|L^{-1}\|_2^{-1} \|L\|_F
+	&\leq \|A\|_F
+      \end{align}
+      This is the first inequality we wanted to show. 
+      For the second, we use the previous identity on $\|A\|_F$
+      followed by the original identity on $\|A^{-1}\|_2 \|L\|_F$
+      to find
+      \begin{align}
+	\|A\|_F \|A^{-1}\|_2
+	&\geq \|L^{-1}\|_2^{-1} \|L\|_F \|A^{-1}\|_2  \\
+	&\geq \|L^{-1}\|_2^{-1} \|A^{-1} L\|_F \\
+	&= \|L^{-1}\|_2^{-1} \|(L^{-1})^\top L^{-1} L\|_F
+	= \|L^{-1}\|_2^{-1} \|L^{-1}\|_F
+      \end{align}
+
+    \item
+      Expanding the square, applying triange inequality, and using the original
+      inequality
+      \begin{align}
+	E 
+	&= -A + (A + E)
+	= L G^\top + G L^\top + G G^\top \\
+	\|E\|_F &\leq 2 \|L G^\top\|_F + \|G G^\top\|_F
+		\leq 2 \|L\|_2 \|G\|_F + \|G\|_F^2
+      \end{align}
+      Applyin the quadratic formula to solve in terms of $\|G\|_F$
+      and selecting solution by non-negativity gives
+      \begin{align}
+	\|G\|_F &\geq -\|L\|_2 + \sqrt{\|L\|_2^2 + \|E\|_F} \\
+	\frac{\|G\|_F}{\|L\|_2} &\geq \sqrt{1 + \|E\|_F / \|L\|^2_2}  - 1
+      \end{align}
+      Noting that $\|A\|_2 = \|L L^\top\|_2 \geq \|L\|_2^2$ by
+      sub-multiplicativity of spectral norm, we have
+      \begin{align}
+	\frac{\|G\|_F}{\|L\|_2} 
+	&= \frac{\|E\|_F / \|A\|_2}{1 + \sqrt{1 + \|E\|_F / \|A\|_2}}
+      \end{align}
+
+      The second inequality with $\kappa(A)$ comes from applying 
+      sub-multiplicativity of Frobenius norm instead to get
+      \begin{align}
+	\|E\|_F &\leq 2 \|L\|_F \|G\|_F + \|G\|_F^2 \\
+	\frac{\|G\|_F}{\|L\|_F} &\geq \sqrt{1 + \|E\|_F / \|L\|_F^2}  - 1
+      \end{align}
+      and noting by the second inequality in problem (1) applied to $\kappa(A)$
+      and the first inequality in problem (1)
+      \begin{align}
+	\kappa(A) \|A\|_F 
+	\geq \|L\|_F \|L^{-1}\|_2 \|A\|_F
+	\geq \|L\|_F^2  
+      \end{align}
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}[B: Orthogonally invariant norms]
+	
+\end{problem}
+
+\begin{solution}
+	
+\end{solution}
 
 \end{document}
