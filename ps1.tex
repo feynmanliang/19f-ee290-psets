@@ -21,7 +21,7 @@
 \begin{document}
 
 \begin{problem}[A: Perturbation bound analysis]
-	
+
 \end{problem}
 
 \begin{solution}
@@ -42,7 +42,7 @@
 	\|L^{-1}\|_2^{-1} \|L\|_F
 	&\leq \|A\|_F
       \end{align}
-      This is the first inequality we wanted to show. 
+      This is the first inequality we wanted to show.
       For the second, we use the previous identity on $\|A\|_F$
       followed by the original identity on $\|A^{-1}\|_2 \|L\|_F$
       to find
@@ -58,7 +58,7 @@
       Expanding the square, applying triange inequality, and using the original
       inequality
       \begin{align}
-	E 
+	E
 	&= -A + (A + E)
 	= L G^\top + G L^\top + G G^\top \\
 	\|E\|_F &\leq 2 \|L G^\top\|_F + \|G G^\top\|_F
@@ -73,11 +73,11 @@
       Noting that $\|A\|_2 = \|L L^\top\|_2 \geq \|L\|_2^2$ by
       sub-multiplicativity of spectral norm, we have
       \begin{align}
-	\frac{\|G\|_F}{\|L\|_2} 
+	\frac{\|G\|_F}{\|L\|_2}
 	&= \frac{\|E\|_F / \|A\|_2}{1 + \sqrt{1 + \|E\|_F / \|A\|_2}}
       \end{align}
 
-      The second inequality with $\kappa(A)$ comes from applying 
+      The second inequality with $\kappa(A)$ comes from applying
       sub-multiplicativity of Frobenius norm instead to get
       \begin{align}
 	\|E\|_F &\leq 2 \|L\|_F \|G\|_F + \|G\|_F^2 \\
@@ -86,19 +86,121 @@
       and noting by the second inequality in problem (1) applied to $\kappa(A)$
       and the first inequality in problem (1)
       \begin{align}
-	\kappa(A) \|A\|_F 
+	\kappa(A) \|A\|_F
 	\geq \|L\|_F \|L^{-1}\|_2 \|A\|_F
-	\geq \|L\|_F^2  
+	\geq \|L\|_F^2
       \end{align}
   \end{enumerate}
 \end{solution}
 
 \begin{problem}[B: Orthogonally invariant norms]
-	
 \end{problem}
 
 \begin{solution}
-	
+  \begin{enumerate}
+    \item
+      Consider $g(s(A)) = \|\diag(s(A))\| = \|\Sigma\|$.  This is well defined by
+      uniqueness of SVD and orthogonal invariance of $\|\cdot\|$.
+      To see that this is a symmetric gauge function, any permutation
+      matrix $P$ is unitary hence
+      \begin{align}
+	g(P s(A)) = \|P \Sigma \| = \| \Sigma \|
+      \end{align}
+      again by orthogonal invariance.
+    \item
+      $g(\cdot)$ being an absolute vector norm gives us everything except the
+      triangle inequality. If we let $g_*$ denote the Fenchel dual to
+      the vector norm $g$, then we have
+      \begin{align}
+	g(s(A+B))
+	&= g_{**}(s(A+B)) \\
+	&= \sup_{z : g_*(z) \leq 1} \braket{z,s(A+B)}  \\
+	&= \sup_{C : g_*(s(C)) \leq 1} \Tr C^\top (A+B) \\
+	&\leq \sup_{C : g_*(s(C)) \leq 1} \Tr C^\top A
+	+ \sup_{C : g_*(s(C)) \leq 1} \Tr C^\top B \\
+	&= g(s(A)) + g(s(B))
+      \end{align}
+
+      Orthogonal invariance follows from noting that
+      \begin{align}
+	g(s(A))
+	&= g_{**}(s(A))
+	= \sup_{C : g_*(s(C)) \leq 1} \Tr C^\top A
+	= \sup_{C : g_*(s(C)) \leq 1} \sum_{i=1}^j \sigma_i(A) \sigma_i(C)
+      \end{align}
+      and hence the norm $\|A\| = g(s(A))$ only depends on the singular values.
+  \end{enumerate}
 \end{solution}
+
+\begin{problem}[C: Maximum Clique]
+\end{problem}
+
+\begin{solution}
+  The task is to generalize from $G(n,1/2)$ to $G(n,p)$, where we show
+  $\frac{\omega(G_n)}{\log_2 n} \to 1/p$.
+
+  The upper deviation bound
+  \begin{align}
+    \Pr[\omega(G_n) \geq (1/p + \eps) \log_2 n] \to 0
+  \end{align}
+  follows from the first moment method using $p^{\binom{k}{2}}$ in place of
+  $2^{-\binom{k}{2}}$.
+
+  The lower deviation bound
+  \begin{align}
+    \Pr[\omega(G_n) \geq k = (1/p - \eps) \log_2 n] \to 1
+  \end{align}
+  similarly follows by tracing the second moment method argument and replacing
+  $2^{-2 \binom{k}{2} + \binom{l}{2}}$
+  with $p^{2 \binom{k}{2} - \binom{l}{2}}$.
+\end{solution}
+
+\begin{problem}[D: Weyl's inequality]
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}
+    \item
+      \begin{align}
+	A = \sum_j \lambda_j(A) u_j u_j^\top
+      \end{align}
+      So any $V$ will be spanned by a $\dim(V) = i$ subset
+      of the eigenvectors $\{u_{V(j)}\}_{j=1}^i$ from which we find
+      \begin{align}
+	\inf_{v \in V: \|v\|_2 = 1} v^\top A v
+	&= \inf_{v \in V: \|v\|_2 = 1} \sum_j \lambda_{V(j)}(A) \braket{v, u_{V(j)}}
+	= \lambda_{V(i)}(A)
+      \end{align}
+      where the last equality is due to the infimum being attained when
+      all of $v$ is weighted on the smallest eigenvalue $\lambda_{V(i)}(A)$.
+      To maximize the smallest eigenvalue, $V$ must contain the top $i$
+      eigenvalues (i.e. $V(i) = i$) and $\sup_{V : \dim(V) = i} \lambda_{V(i)} = \lambda_i$.
+    \item
+      \begin{align}
+      	\|A - B \|_2
+	&= \left\lvert
+	  \sup_{\dim(V) = 1} \inf_{v \in V : \|v\|_2 = 1} v^\top (A - B) v
+	\right\rvert \\
+	&\geq \left\lvert
+	  \sup_{\dim(V) = 1} \inf_{v \in V : \|v\|_2 = 1} v^\top A v
+	  + \sup_{\dim(W) = 1} \inf_{w \in W : \|w\|_2 = 1} (- w^\top B w)
+	\right\rvert \\
+	&\geq \left\lvert
+	  \sup_{\dim(V) = i} \inf_{v \in V : \|v\|_2 = 1} v^\top A v
+	  + \sup_{\dim(W) = n-i} \inf_{w \in W : \|w\|_2 = 1} (- w^\top B w)
+	\right\rvert \\
+	&= \left\lvert
+	  \lambda_i(A)
+	  - \inf_{\dim(W) = n-i} \sup_{w \in W : \|w\|_2 = 1} w^\top B w
+	\right\rvert
+      \end{align}
+      where the inequalities follow because
+      we used a complement of the Courant-Fischer representation
+      in the last line.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}[E: Experiments for planted clique]
+\end{problem}
 
 \end{document}
