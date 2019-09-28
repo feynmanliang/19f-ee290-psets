@@ -3,6 +3,7 @@
 \input{macros}
 
 \usepackage[margin=1in]{geometry}
+\usepackage{float}
 \usepackage{graphicx}
 \usepackage{braket}
 \usepackage{bbm}
@@ -176,31 +177,47 @@
       To maximize the smallest eigenvalue, $V$ must contain the top $i$
       eigenvalues (i.e. $V(i) = i$) and $\sup_{V : \dim(V) = i} \lambda_{V(i)} = \lambda_i$.
     \item
+      We will just show
       \begin{align}
-      	\|A - B \|_2
-	&= \left\lvert
-	  \sup_{\dim(V) = 1} \inf_{v \in V : \|v\|_2 = 1} v^\top (A - B) v
-	\right\rvert \\
-	&\geq \left\lvert
-	  \sup_{\dim(V) = 1} \inf_{v \in V : \|v\|_2 = 1} v^\top A v
-	  + \sup_{\dim(W) = 1} \inf_{w \in W : \|w\|_2 = 1} (- w^\top B w)
-	\right\rvert \\
-	&\geq \left\lvert
-	  \sup_{\dim(V) = i} \inf_{v \in V : \|v\|_2 = 1} v^\top A v
-	  + \sup_{\dim(W) = n-i} \inf_{w \in W : \|w\|_2 = 1} (- w^\top B w)
-	\right\rvert \\
-	&= \left\lvert
-	  \lambda_i(A)
-	  - \inf_{\dim(W) = n-i} \sup_{w \in W : \|w\|_2 = 1} w^\top B w
-	\right\rvert
+	\|A - B\|_2 + \lambda_i(B) \geq \lambda_i(A)
       \end{align}
-      where the inequalities follow because
-      we used a complement of the Courant-Fischer representation
-      in the last line.
+      and use symmetry (tracking sign change) to argue the other half.
+      To show this, note by the Courant-Fisher representation derived above
+      it suffices to show that every $\dim(V)=i$ subspace has some $v \in V$
+      such that $\|v\|=1$ and
+      \begin{align}
+	v^\top(A-B)v \leq \|A - B\|_2 + \lambda_i(B)
+      \end{align}
+      Since every $v \in \RR^d$ satisfies $v^\top (A - B) v \leq \|A - B\|_2$
+      and the converse of the Courant-Fisher representation implies that some
+      $\dim(U) = n - i + 1$ subspace has $u^\top B u \leq \lambda_i(B)$ for all
+      $u \in U$, we have (by pidgeonhole principle)
+      \begin{align}
+	\dim(V \cap \RR^d \cap U)
+	\geq 1
+      \end{align}
   \end{enumerate}
 \end{solution}
 
 \begin{problem}[E: Experiments for planted clique]
 \end{problem}
+
+\begin{solution}
+    \begin{enumerate}
+        \item
+	  \begin{figure}[H]
+	    \centering
+	    \includegraphics[width=0.6\textwidth]{figures/no-cleaning.png}
+	  \end{figure}
+        \item
+	  \begin{figure}[H]
+	    \centering
+	    \includegraphics[width=0.6\textwidth]{figures/with-cleaning.png}
+	  \end{figure}
+	\item
+	  TODO
+    \end{enumerate}
+
+\end{solution}
 
 \end{document}
